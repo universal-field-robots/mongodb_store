@@ -202,7 +202,10 @@ def sanitize_value(attr, v, type):
             # ensure unicode
             try:
                 if _PY3:
-                    v = str(v, "utf-8")
+                    try:
+                        v = str(v, "utf-8")
+                    except TypeError as e:
+                        pass
                 else:
                     v = unicode(v, "utf-8")
             except UnicodeDecodeError as e:
